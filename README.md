@@ -23,9 +23,13 @@ Você pode acessar o placar online clicando aqui: **[COLOQUE SEU LINK DO GITHUB 
 
 ## 📸 Preview
 
-![Interface do Placar](https://via.placeholder.com/300x600?text=Placar+Volei+Mobile) ## ✒️ Autor
+<div align="center">
+  <img src="https://github.com/user-attachments/assets/ed142dd7-acf9-4b4a-a35e-1c3866766f72" width="600" alt="Interface do Placar Vôlei">
+  <p><i>Visualização da interface principal do placar</i></p>
+</div>
 
-* **Zurk** - *Desenvolvimento inicial* - [SeuGitHub](https://github.com/seu-usuario)
+## ✒️ Autor
+* **Bruno de Jesus C.** - *Desenvolvimento inicial* - [BrunoJss](https://github.com/BrunoJss)
 
 ---
 Desenvolvido para facilitar a vida de quem joga vôlei! 🏐
