@@ -1,0 +1,16 @@
+{
+    "short_name": "PlacarVolei",
+    "name": "Placar de Vôlei Mobile",
+    "icons": [
+        {
+            "src": "https://cdn-icons-png.flaticon.com/512/3563/3563214.png",
+            "type": "image/png",
+            "sizes": "512x512"
+        }
+    ],
+    "start_url": ".",
+    "display": "standalone",
+    "background_color": "#2f3542",
+    "theme_color": "#2f3542",
+    "orientation": "landscape"
+}

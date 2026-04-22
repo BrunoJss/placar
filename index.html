@@ -5,6 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Placar de Vôlei</title>
+    <link rel="manifest" href="manifest.json">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
         :root {
@@ -117,6 +120,27 @@
         .btn-acao:active {
             transform: scale(0.95);
         }
+
+        @media (orientation: landscape) {
+            .placar-container {
+                flex-direction: row !important;
+                /* Garante que fiquem lado a lado */
+            }
+
+            .pontos {
+                font-size: 15rem;
+                /* Aumenta muito o número na horizontal */
+            }
+
+            .nome-time {
+                font-size: 2rem;
+            }
+
+            .menu-inferior {
+                height: 60px;
+                /* Reduz a barra inferior para sobrar espaço pros pontos */
+            }
+        }
     </style>
 </head>
 
@@ -151,11 +175,48 @@
             <i class="fas fa-redo"></i>
             Zerar Set
         </button>
+        <button class="btn-acao" onclick="toggleFullScreen()">
+            <i class="fas fa-expand"></i>
+            Tela Cheia
+        </button>
     </footer>
 
     <script>
+        document.addEventListener('click', function () {
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen().catch(err => {
+                    console.log("Erro ao tentar tela cheia: " + err.message);
+                });
+            }
+        }, { once: true });
+
         let pontosA = 0;
         let pontosB = 0;
+        function salvarDados() {
+            const dados = {
+                ptsA: pontosA,
+                ptsB: pontosB,
+                // Salva também se a ordem está invertida para não bugar ao recarregar
+                invertido: document.getElementById('container').style.flexDirection === 'row-reverse'
+            };
+            localStorage.setItem('placarVolei', JSON.stringify(dados));
+        }
+
+
+        function carregarDados() {
+            const dadosSalvos = localStorage.getItem('placarVolei');
+            if (dadosSalvos) {
+                const dados = JSON.parse(dadosSalvos);
+                pontosA = dados.ptsA;
+                pontosB = dados.ptsB;
+
+                if (dados.invertido) {
+                    document.getElementById('container').style.flexDirection = 'row-reverse';
+                }
+
+                atualizarTela();
+            }
+        }
 
         function atualizarTela() {
             document.getElementById('pts-a').innerText = pontosA.toString().padStart(2, '0');
@@ -168,6 +229,7 @@
             } else {
                 pontosB = Math.max(0, pontosB + valor);
             }
+            salvarDados();
             atualizarTela();
         }
 
@@ -182,15 +244,31 @@
             } else {
                 container.style.flexDirection = 'row-reverse';
             }
+            salvarDados();
         }
 
         function resetar() {
             if (confirm("Deseja zerar o placar deste set?")) {
                 pontosA = 0;
                 pontosB = 0;
+                salvarDados();
                 atualizarTela();
             }
         }
+
+        function toggleFullScreen() {
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen().then(() => {
+                    // Tenta travar a tela em horizontal (funciona em muitos Androids)
+                    if (screen.orientation && screen.orientation.lock) {
+                        screen.orientation.lock('landscape');
+                    }
+                });
+            } else {
+                document.exitFullscreen();
+            }
+        }
+        carregarDados();
     </script>
 </body>
 
