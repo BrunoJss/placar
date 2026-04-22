@@ -3,7 +3,7 @@
     "name": "Placar de Vôlei Mobile",
     "icons": [
         {
-            "src": "https://cdn-icons-png.flaticon.com/512/3563/3563214.png",
+            "src": "icone.png",
             "type": "image/png",
             "sizes": "512x512"
         }
