@@ -9,8 +9,9 @@
         }
     ],
     "start_url": ".",
-    "display": "standalone",
-    "background_color": "#2f3542",
-    "theme_color": "#2f3542",
+    "display": "fullscreen",
+    "background_color": "#1e2124",
+    "lang": "pt-BR",
+    "theme_color": "#1e2124",
     "orientation": "landscape"
 }
